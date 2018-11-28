@@ -42,8 +42,8 @@ public class GuavaCacheDemo {
 
     public static void main(String[] args) {
 
-        System.out.println(CacheLoaderDemo.getKey("test"));
-        CacheLoaderDemo.setKey("test","123");
-        System.out.println(CacheLoaderDemo.getKey("test"));
+        System.out.println(GuavaCacheDemo.getKey("test"));
+        GuavaCacheDemo.setKey("test","123");
+        System.out.println(GuavaCacheDemo.getKey("test"));
     }
 }
