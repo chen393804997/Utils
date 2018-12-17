@@ -58,6 +58,20 @@
             <version>1.9.3</version>
         </dependency>
 
+        <!-- pdf导出 -->
+        <dependency>
+            <groupId>com.lowagie</groupId>
+            <artifactId>itext</artifactId>
+            <version>2.0.8</version>
+        </dependency>
+        <dependency>
+            <groupId>org.xhtmlrenderer</groupId>
+            <artifactId>flying-saucer-pdf-itext5</artifactId>
+            <version>9.1.9</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
