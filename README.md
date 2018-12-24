@@ -1,5 +1,5 @@
 # Utils
-## 目前已有功能
+## 目前已有功能：
 ### 1.redis常用工具类
 ### 2.ratelimiter限流方法
 ### 3.GuavaCache缓存方法
