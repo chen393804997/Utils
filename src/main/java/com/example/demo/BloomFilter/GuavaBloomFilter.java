@@ -16,16 +16,23 @@ public class GuavaBloomFilter {
     public static final int EXPECTEDINSERTIONS = 10000000;
     /** 误差率*/
     public static final double FPP = 0.1;
-
+    /**  存放integer*/
     public static BloomFilter<Integer> bloomFilterInt = BloomFilter.create(Funnels.integerFunnel(),EXPECTEDINSERTIONS,FPP);
+    /** 存放string*/
+    public static BloomFilter<CharSequence> bloomFilterString = BloomFilter.create(Funnels.stringFunnel(Charset.forName("UTF-8")), EXPECTEDINSERTIONS,FPP);
 
-    public BloomFilter<CharSequence> bloomFilterString = BloomFilter.create(Funnels.stringFunnel(Charset.forName("UTF-8")), EXPECTEDINSERTIONS,FPP);
-
-    public static void put(Integer value){
+    public static void putInteger(Integer value){
         bloomFilterInt.put(value);
     }
+    public static void putString(String value){
+        bloomFilterString.put(value);
+    }
 
-    public static boolean check(Integer key){
+    public static boolean checkInteger(Integer key){
         return bloomFilterInt.mightContain(key);
+    }
+
+    public static boolean checkString(String key){
+        return bloomFilterString.mightContain(key);
     }
 }
