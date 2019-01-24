@@ -70,6 +70,13 @@
             <version>9.1.9</version>
         </dependency>
 
+        <!--引入语言处理工具包-->
+        <dependency>
+            <groupId>com.hankcs</groupId>
+            <artifactId>hanlp</artifactId>
+            <version>portable-1.2.8</version>
+        </dependency>
+
 
 
     </dependencies>
