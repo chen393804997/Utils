@@ -15,7 +15,7 @@ public class JedisPoolUtil {
     /** redis端口号*/
     private static int port = 6379;
     /** redis密码*/
-    private static String password = "123456";
+    //private static String password = "123456";
 
     private static JedisPool jedisPool = null;
 
@@ -40,7 +40,7 @@ public class JedisPoolUtil {
                     poolConfig.setMinEvictableIdleTimeMillis(60000);
                     //在borrow一个jedis实例时，是否提前进行validate操作；如果为true，则得到的jedis实例均是可用的；
                     //poolConfig.setTestOnBorrow(true);
-                    jedisPool = new JedisPool(poolConfig, ip,port,30000,password);
+                    jedisPool = new JedisPool(poolConfig, ip,port,30000);
                 }
             }
         }

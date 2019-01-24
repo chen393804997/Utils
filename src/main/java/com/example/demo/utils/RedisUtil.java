@@ -86,12 +86,22 @@ public class RedisUtil {
         return value;
     }
 
-    public static void set(String key,String value,int seconds){
+    public static void setex(String key,String value,int seconds){
         Jedis jedis = null;
         try {
             jedis = JedisPoolUtil.getJedis();
-            jedis.set(key, value);
-            jedis.expire(key, seconds);
+            jedis.setex(key,seconds,value);
+        }catch (Exception e){
+        }finally {
+            JedisPoolUtil.returnResource(jedis);
+        }
+    }
+
+    public static void set(String key,String value){
+        Jedis jedis = null;
+        try {
+            jedis = JedisPoolUtil.getJedis();
+            jedis.set(key,value);
         }catch (Exception e){
         }finally {
             JedisPoolUtil.returnResource(jedis);
@@ -569,6 +579,67 @@ public class RedisUtil {
         }
         return result;
     }
+    public static List<String> lrange(String key, long start, long end) {
+        List<String> result = null;
+        Jedis jedis = null;
+        try {
+            jedis = JedisPoolUtil.getJedis();
+            if (jedis == null){
+                return result;
+            }
+            result = jedis.lrange(key, start, end);
+        }catch (Exception e){
+        }finally {
+            JedisPoolUtil.returnResource(jedis);
+        }
+        return result;
+    }
 
+    public static Long rpush(String key, String string) {
+        Long result = null;
+        Jedis jedis = null;
+        try {
+            jedis = JedisPoolUtil.getJedis();
+            if (jedis == null){
+                return result;
+            }
+            result = jedis.rpush(key, string);
+        }catch (Exception e){
+        }finally {
+            JedisPoolUtil.returnResource(jedis);
+        }
+        return result;
+    }
+
+    public static Long incr(String key) {
+        Long result = null;
+        Jedis jedis = null;
+        try {
+            jedis = JedisPoolUtil.getJedis();
+            if (jedis == null){
+                return result;
+            }
+            result = jedis.incr(key);
+        }catch (Exception e){
+        }finally {
+            JedisPoolUtil.returnResource(jedis);
+        }
+        return result;
+    }
+    public static Set<String> smembers(String key) {
+        Set<String> result = null;
+        Jedis jedis = null;
+        try {
+            jedis = JedisPoolUtil.getJedis();
+            if (jedis == null){
+                return result;
+            }
+            result = jedis.smembers(key);
+        }catch (Exception e){
+        }finally {
+            JedisPoolUtil.returnResource(jedis);
+        }
+        return result;
+    }
 
 }
