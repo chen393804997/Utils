@@ -4,12 +4,16 @@ package com.example.demo.Img;
 import com.gif4j.*;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.Iterator;
 
 public class ImgUtil {
 
@@ -225,5 +229,45 @@ public class ImgUtil {
 
         //输出
         GifEncoder.encode(gf, dest);
+    }
+
+    /**
+     * 获取图片的帧数
+     * @param imgUrl
+     * @return
+     */
+    public int getImgFrameRate(String imgUrl){
+        URL url = null;
+        ImageInputStream iis = null;
+        int result = 0;
+        try {
+            url = new URL(imgUrl);
+            URLConnection connection = url.openConnection();
+            // create an image input stream from the specified fileDD
+            iis = ImageIO.createImageInputStream(connection.getInputStream());
+            // get all currently registered readers that recognize the image format
+            Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
+            if (!iter.hasNext()) {
+                throw new RuntimeException("No readers found!");
+            }
+            // get the first reader
+            ImageReader reader = iter.next();
+            //reader.getFormatName() ：获取图片的格式
+            reader.setInput(iis, false);
+            result = reader.getNumImages(true);
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            if (iis != null){
+                try {
+                    iis.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return result;
     }
 }
