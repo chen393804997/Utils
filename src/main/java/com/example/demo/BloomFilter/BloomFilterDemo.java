@@ -91,12 +91,12 @@ public class BloomFilterDemo {
     }
 
     public static void main(String[] args) {
-        int index = 10000000;
-        BloomFilterDemo bfd = new BloomFilterDemo(index);
+        int index = 100;
+        BloomFilterDemo bfd = new BloomFilterDemo(100000);
         for (int i = 0; i < index; i++){
             bfd.add("czw"+i);
         }
-        boolean isExistence = bfd.check("czw10312");
+        boolean isExistence = bfd.check("czw124");
         System.out.println(isExistence);
 
     }
