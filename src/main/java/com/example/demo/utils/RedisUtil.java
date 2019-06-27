@@ -642,4 +642,17 @@ public class RedisUtil {
         return result;
     }
 
+    public static Object evalsha(String lua,List<String> keys,List<String> values){
+        Jedis jedis = null;
+        Object result = null;
+        try {
+            jedis = JedisPoolUtil.getJedis();
+            result = jedis.evalsha(jedis.scriptLoad(lua), keys, values);
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            JedisPoolUtil.returnResource(jedis);
+        }
+        return result;
+    }
 }
