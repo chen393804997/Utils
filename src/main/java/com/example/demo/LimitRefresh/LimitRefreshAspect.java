@@ -57,25 +57,35 @@ public class LimitRefreshAspect {
         Object[] args = joinPoint.getArgs();
         String prefix = annotation.keyPrefix();
         String suffix = annotation.keySuffix();
-        int seconds = annotation.seconds();
-        int frequency = annotation.frequency();
+        int seconds = annotation.seconds() <= 0 ? 2 : annotation.seconds();
+        int frequency = annotation.frequency() <= 0 ? 1 : annotation.frequency();
         String key = handleKey(prefix,suffix,signature,args);
         isLimit(key,seconds,frequency);
         Object result = null;
+        boolean isDelete = false;
+        boolean failIsDeleteKey = annotation.failIsDeleteKey();
+        boolean successIdDeleteKey = annotation.successIdDeleteKey();
         try {
             result = joinPoint.proceed();
+            isDelete = successIdDeleteKey;
         }catch (ResultException e){
+            isDelete = failIsDeleteKey;
             throw e;
         }catch (Throwable throwable){
+            isDelete = failIsDeleteKey;
             throw throwable;
         }finally {
+            if (isDelete)
+                deleteKey(key);
             long e = System.currentTimeMillis();
             logger.info(method+" the time consumption："+(e-s));
         }
         return result;
     }
 
-
+    private void deleteKey(String key){
+        RedisUtil.delete(key);
+    }
     private void isLimit(String key,int seconds,int frequency) throws ResultException {
         List<String> keys = new ArrayList<String>(2);
         keys.add(key);

@@ -34,4 +34,16 @@ public @interface LimitRefresh {
      */
     int frequency() default 1;
 
+    /**
+     * 失败是否需要删除key
+     * @return
+     */
+    boolean failIsDeleteKey() default false;
+
+    /**
+     * 成功是否需要删除key
+     * @return
+     */
+    boolean successIdDeleteKey() default false;
+
 }
