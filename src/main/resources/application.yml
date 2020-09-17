@@ -5,25 +5,25 @@ server:
 
 
 #jetCache ª∫¥Ê≈‰÷√
-jetcache:
-  statIntervalMinutes: 15
-  areaInCacheName: false
-  local:
-    default:
-      type: linkedhashmap
-      keyConvertor: fastjson
-    otherCacheName:
-      type: xxx
-      keyConverter: yyy
-  remote:
-    default:
-      type: redis
-      keyConvertor: fastjson
-      valueEncoder: java
-      valueDecoder: java
-      poolConfig:
-        minIdle: 5
-        maxIdle: 20
-        maxTotal: 50
-      host: 127.0.0.1
-      port: 6379
+#jetcache:
+#  statIntervalMinutes: 15
+#  areaInCacheName: false
+#  local:
+#    default:
+#      type: linkedhashmap
+#      keyConvertor: fastjson
+#    otherCacheName:
+#      type: xxx
+#      keyConverter: yyy
+#  remote:
+#    default:
+#      type: redis
+#      keyConvertor: fastjson
+#      valueEncoder: java
+#      valueDecoder: java
+#      poolConfig:
+#        minIdle: 5
+#        maxIdle: 20
+#        maxTotal: 50
+#      host: 127.0.0.1
+#      port: 6379

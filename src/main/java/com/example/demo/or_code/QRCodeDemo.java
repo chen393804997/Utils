@@ -184,14 +184,15 @@ public class QRCodeDemo extends LuminanceSource {
         Hashtable<EncodeHintType, Object> hints = new Hashtable<>();
         hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
         BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
-        String pathName = "F:/new.png";
+        String pathName = "C:\\Users\\薛嵘锦\\Desktop\\new.png";
         File outputFile = new File(pathName);
         writeToFile(bitMatrix, format, outputFile);
         return pathName;
     }
 
-    public static void main(String[] args) {
-        String str = QRCodeDemo.parseQRCode("http://www.youfenba.com/qrcode/create.html?url=http%3A%2F%2Fyjxmt.youfenba.com%2FIndex%2Forder_article_details.html%3Fid%3D356001%26current_type%3D1");
-        System.out.println(str);
+    public static void main(String[] args) throws Exception {
+        //String str = QRCodeDemo.parseQRCode("http://www.youfenba.com/qrcode/create.html?url=http%3A%2F%2Fyjxmt.youfenba.com%2FIndex%2Forder_article_details.html%3Fid%3D356001%26current_type%3D1");
+        //System.out.println(str);
+        generateQRCode("http://www.baidu.com",300,300,"png");
     }
 }

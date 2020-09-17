@@ -6,6 +6,8 @@ import org.apache.commons.lang3.SystemUtils;
 
 import java.net.Inet4Address;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Twitter_Snowflake<br>
@@ -170,17 +172,20 @@ public class SnowflakeIdWorker {
      *
      * @return
      */
-    public static Long generateId(){
+    public static String generateId(){
         long id = idWorker.nextId();
-        return id;
+        return (new SimpleDateFormat("yyyyMMddHHmmss").format(new Date()) + id);
+
     }
     public static void main(String[] args) {
         System.out.println(System.currentTimeMillis());
         long startTime = System.nanoTime();
         for (int i = 0; i < 50000; i++) {
-            long id = SnowflakeIdWorker.generateId();
+            String id = SnowflakeIdWorker.generateId();
             System.out.println(id);
         }
         System.out.println((System.nanoTime()-startTime)/1000000+"ms");
+
+
     }
 }
